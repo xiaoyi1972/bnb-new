@@ -1,0 +1,40 @@
+canvas {
+position: absolute;
+top: 50%;
+left: 50%;
+margin: -320 -320 auto;
+z-index: 5;
+border: 1px solid #d3d3d3;;
+}
+
+.editItem {
+position: absolute;
+top: 50%;
+right: 20%;
+margin: -284 -15 0 0;
+width: 60;
+height: 400;
+border: 1px solid white;
+overflow-y: auto;
+z-index: 6;
+}
+
+.floorItem {
+position: absolute;
+top: 50%;
+right: 20%;
+margin: -284 -80 0 0;
+width: 60;
+height: 400;
+border: 1px solid white;
+overflow-y: auto;
+z-index: 6;
+}
+
+div {
+user-select: none;
+}
+
+img {
+-webkit-user-drag: none;
+}

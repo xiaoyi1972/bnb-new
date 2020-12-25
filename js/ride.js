@@ -1,0 +1,49 @@
+let ridePic = {
+    1: { url: "pic/Owl.png", width: 40, height: 40, offsetX: 4, offsetY: 35+12, speed: 4, canMove: false },
+    2: { url: "pic/SlowTurtle.png", width: 48, height: 32, offsetX: 0, offsetY: 43+12, speed: 2, canMove: false },
+    3: { url: "pic/Turtle.png", width: 48, height: 32, offsetX: 0, offsetY: 43+12, speed: 6, canMove: false },
+    4: { url: "pic/FastUFO.png", width: 52, height: 31, offsetX: -2, offsetY: 44+12, speed: 6, canMove: true }
+};
+
+class Rider {
+    constructor(type, player) {
+        this.player = player;
+        this.type = type;
+        this.canMove = ridePic[this.type].canMove;
+        this.speed = ridePic[this.type].speed;
+        this.bmp = null;
+        this.init(this.type);
+    }
+
+    init(type) {
+        this.bmp = new Bitmap(ridePic[type].url);
+        this.bmp.pos = new Pos(0 + this.player.bmp.pos.x + ridePic[this.type].offsetX, 0 + this.player.bmp.pos.y + ridePic[this.type].offsetY);
+        //this.bmp.divide=new Pos(0,ridePic[this.type].height);
+        this.bmp.divide.y = this.player.dir * ridePic[this.type].height;
+        this.bmp.divide.x = Math.floor(this.player.status / 9) * ridePic[this.type].width;
+        this.bmp.size = new Size(ridePic[this.type].width, ridePic[this.type].height);
+        this.bmp.offset = this.player.bmp.offset;
+        this.bmp.Zindex = this.player.bmp.Zindex;
+        this.bmp.cover = this.player.bmp.cover;
+    }
+
+
+
+    update(player) {
+        this.bmp.Zindex = player.bmp.Zindex;
+        if (this.type == 4) {
+         //  let o = this.player.getMap(24, 24 + 15);
+           // this.bmp.Zindex = (o.x + 1) * 3 + 1;
+        }
+        this.bmp.pos.x = player.bmp.pos.x + ridePic[this.type].offsetX;
+        this.bmp.pos.y = player.bmp.pos.y + ridePic[this.type].offsetY;
+        this.bmp.divide.y = player.dir * ridePic[this.type].height;
+        this.bmp.divide.x = Math.floor(player.status / 9) * ridePic[this.type].width;
+        this.bmp.cover = this.player.bmp.cover;
+    }
+
+    del() {
+        this.bmp.visible = false;
+    }
+
+}
