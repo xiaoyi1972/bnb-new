@@ -98,88 +98,90 @@ let keys = {
     222: "'",
     undefined: "---",
     0: "---"
-};
+}
 
-let currentKeyCode = 0;
-let isKeyup = false;
+let currentKeyCode = 0
+let isKeyup = false
 
 function createRoleEvent(player) {
-    document.addEventListener('keydown', keydown);
-    document.addEventListener('keyup', keydownend);
+    document.addEventListener('keydown', keydown)
+    document.addEventListener('keyup', keydownend)
 
     function keydown(event) {
         //if (event.keyCode in {37:'Left',38:'UP',39:'Right',40:'Right'})
-        rolekey(player, event.keyCode);
+        rolekey(player, event.keyCode)
     }
 
     function keydownend(event) {
-       // if (event.keyCode in { 37: 'Left', 38: 'UP', 39: 'Right', 40: 'Down' })
-            rolekeyend(player, event.keyCode);
+        // if (event.keyCode in { 37: 'Left', 38: 'UP', 39: 'Right', 40: 'Down' })
+        rolekeyend(player, event.keyCode)
     }
 
 }
 
 function rolekey(player, key) {
-     if (key in { 37: 'Left', 38: 'UP', 39: 'Right', 40: 'Down' }) {
-    if (key != currentKeyCode) {
-        isKeyup = false;
-        //player.stopMove();
-    }
-
-
-    if (!isKeyup) {
-        currentKeyCode = key;
-        isKeyup = true;
-        switch (key) {
-            case 37:
-                //player.direction=2;
-                player.moveActivate = function () {
-                    player.move(directions.Left);
-                }
-                break;//左；
-            case 39://player.x++;
-                //player.direction=3;
-                player.moveActivate = function () {
-                    player.move(directions.Right);
-                }
-                break;//右；
-            case 38://player.direction=0;
-                player.moveActivate = function () {
-                    player.move(directions.Up);
-                }
-                break;//上；
-            case 40://player.direction=1;
-                player.moveActivate = function () {
-                    player.move(directions.Down);
-                }
-                break;//下；
+    if (key in { 37: 'Left', 38: 'UP', 39: 'Right', 40: 'Down' }) {
+        if (key != currentKeyCode) {
+            isKeyup = false
+            //player.stopMove()
         }
+
+
+        if (!isKeyup) {
+            currentKeyCode = key
+            isKeyup = true
+            switch (key) {
+                case 37:
+                    //player.direction=2
+                    player.moveActivate = function () {
+                        player.move(directions.Left)
+                    }
+                    break;//左；
+                case 39://player.x++
+                    //player.direction=3
+                    player.moveActivate = function () {
+                        player.move(directions.Right)
+                    }
+                    break;//右；
+                case 38://player.direction=0
+                    player.moveActivate = function () {
+                        player.move(directions.Up)
+                    }
+                    break;//上；
+                case 40://player.direction=1
+                    player.moveActivate = function () {
+                        player.move(directions.Down)
+                    }
+                    break;//下；
+            }
+            if (player.moveActivate != null)
+                player.moveActivate()
+        }
+
     }
-    
-}
 
     /* else if (key == 81) {
-         player.revive();
+         player.revive()
          //q；
      }
  
      else if (key == 87) {
-         let ai = new AI(player);
-         ai.getway();
+         let ai = new AI(player)
+         ai.getway()
          //q；
      }*/
- 
-     else if (key == 32) {
-         player.putBomb();
-         //空格；
-     }
+
+    else if (key == 32) {
+        player.putBomb()
+        //空格；
+    }
 }
 
 function rolekeyend(player, key) {
     if (key == currentKeyCode) {
-        isKeyup = false;
-        player.moveActivate = null;
-        //player.stopMove();
+        isKeyup = false
+        player.moveActivate = null
+        //player.stopMove()
     }
 
 }
