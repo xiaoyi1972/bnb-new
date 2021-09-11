@@ -2,9 +2,11 @@ canvas {
 position: absolute;
 top: 50%;
 left: 50%;
+/*width: 680;
+height: 600;*/
 margin: -320 -320 auto;
 z-index: 5;
-border: 1px solid #d3d3d3;;
+/*border: 1px solid red;*/
 }
 
 .editItem {
