@@ -18,33 +18,33 @@ let blockType = {
     },
     5: {
         url: "pic/grass.png", offset: new Pos(0, -17),
-        canBomb: true, create: true, produce: false, canMove: false, canPush: false, canHide: true
+        canBomb: true, create: true, produce: false, canMove: true, canPush: false, canHide: true
     },
     6: {
         url: "pic/redblock.png", offset: new Pos(0, -4),
-        canBomb: true, create: true, produce: true, canMove: false, canPush: false, canHide: false
+        canBomb: true, create: true, produce: true, canMove: true, canPush: false, canHide: false
     },
     7: {
         url: "pic/yellowblock.png", offset: new Pos(0, -4),
-        canBomb: true, create: true, produce: true, canMove: false, canPush: false, canHide: false
+        canBomb: true, create: true, produce: true, canMove: true, canPush: false, canHide: false
     },
     8: {
         url: "pic/yellowbox.png", offset: new Pos(0, -4),
-        canBomb: true, create: true, produce: false, canMove: false, canPush: true, canHide: false
+        canBomb: true, create: true, produce: false, canMove: true, canPush: true, canHide: false
     }
 }
 
 let giftType = {
     0: { odds: 190 },
-    1: { url: "pic/Gift1.png", offset: new Pos(-1, -5), size: new Size(42, 45), odds: 40 },
-    2: { url: "pic/Gift2.png", offset: new Pos(-1, -5), size: new Size(42, 45), odds: 40 },
-    3: { url: "pic/Gift3.png", offset: new Pos(-1, -5), size: new Size(42, 45), odds: 40 },
-    4: { url: "pic/Gift4.png", offset: new Pos(-1, -5), size: new Size(42, 45), odds: 3 },
-    5: { url: "pic/Gift7.png", offset: new Pos(2, -2), size: new Size(36, 38), odds: 3 },
-    6: { url: "pic/Gift8.png", offset: new Pos(2, -2), size: new Size(36, 41), odds: 3 },
-    7: { url: "pic/Gift9.png", offset: new Pos(0, -2), size: new Size(40, 41), odds: 7 },
-    8: { url: "pic/Gift6.png", offset: new Pos(-1, -3), size: new Size(42, 46), odds: 7 },
-    9: { url: "pic/Gift5.png", offset: new Pos(-1, -2.5), size: new Size(42, 45), odds: 7 }
+    1: { url: "pic/Gift1.png", offset: new Pos(-1, -2.5), size: new Size(42, 45), odds: 40 },
+    2: { url: "pic/Gift2.png", offset: new Pos(-1, -2.5), size: new Size(42, 45), odds: 40 },
+    3: { url: "pic/Gift3.png", offset: new Pos(-1, -2.5), size: new Size(42, 45), odds: 40 },
+    4: { url: "pic/Gift4.png", offset: new Pos(-1, -2.5), size: new Size(42, 45), odds: 3 },
+    5: { url: "pic/Gift5.png", offset: new Pos(-1, -2.5), size: new Size(42, 45), odds: 7 },
+    6: { url: "pic/Gift6.png", offset: new Pos(-1, -3), size: new Size(42, 46), odds: 7 },
+    7: { url: "pic/Gift7.png", offset: new Pos(2, 1), size: new Size(36, 38), odds: 3 },
+    8: { url: "pic/Gift8.png", offset: new Pos(2, -0.5), size: new Size(36, 41), odds: 3 },
+    9: { url: "pic/Gift9.png", offset: new Pos(0, -0.5), size: new Size(40, 41), odds: 7 },
 }
 
 for (let i in giftType) {
@@ -52,7 +52,10 @@ for (let i in giftType) {
 }
 
 
-let FloorMaps = [[0, 0, 0, 0, 0, 0, 2, 5, 2, 0, 0, 0, 0, 0, 0],
+
+//小区10
+let FloorMaps = [
+[0, 0, 0, 0, 0, 0, 2, 5, 2, 0, 0, 0, 0, 0, 0],
 [0, 0, 0, 0, 0, 0, 2, 5, 2, 0, 0, 0, 0, 0, 0],
 [0, 0, 0, 0, 0, 0, 3, 3, 3, 0, 0, 0, 0, 0, 0],
 [0, 0, 0, 0, 0, 0, 2, 5, 2, 0, 0, 0, 0, 0, 0],
@@ -67,7 +70,8 @@ let FloorMaps = [[0, 0, 0, 0, 0, 0, 2, 5, 2, 0, 0, 0, 0, 0, 0],
 [0, 0, 0, 0, 0, 0, 2, 5, 2, 0, 0, 0, 0, 0, 0]]
 
 
-let BlockMaps = [[0, 7, 6, 7, 6, 5, 0, 0, 8, 5, 3, 6, 3, 0, 3],
+let BlockMaps = [
+[0, 7, 6, 7, 6, 5, 0, 0, 8, 5, 3, 6, 3, 0, 3],
 [0, 1, 8, 1, 8, 4, 8, 0, 0, 4, 7, 6, 0, 0, 0],
 [0, 0, 7, 6, 7, 5, 0, 8, 8, 5, 3, 8, 3, 8, 3],
 [8, 1, 8, 1, 8, 4, 8, 0, 0, 4, 6, 7, 6, 7, 6],
@@ -100,16 +104,16 @@ let BlockMaps = [[0, 7, 6, 7, 6, 5, 0, 0, 8, 5, 3, 6, 3, 0, 3],
 
 let BlockMaps = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 5, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 6, 0, 0, 6, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 8, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 6, 6, 6, 6, 6, 6, 6, 0, 0, 0],
+    [0, 0, 0, 0, 0, 6, 6, 6, 6, 6, 6, 6, 0, 0, 0],
+    [0, 1, 8, 1, 0, 6, 6, 6, 6, 6, 6, 6, 0, 0, 0],
+    [0, 0, 0, 6, 6, 6, 6, 6, 6, 6, 6, 6, 0, 0, 0],
+    [0, 0, 0, 6, 6, 6, 6, 6, 6, 6, 6, 6, 0, 0, 0],
+    [0, 0, 0, 6, 6, 6, 6, 6, 6, 6, 6, 6, 0, 0, 0],
+    [0, 0, 0, 6, 6, 6, 6, 6, 6, 6, 6, 6, 0, 0, 0],
+    [0, 0, 0, 6, 6, 6, 6, 6, 6, 6, 6, 6, 0, 0, 0],
+    [0, 0, 0, 6, 6, 6, 6, 6, 6, 6, 6, 6, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]*/
 
@@ -121,67 +125,57 @@ class Block {
         this.property = _type == 0 ? blockType[_index] : giftType[_index]
         this.create()
         this.map.dataSet(_pos.x, _pos.y, this)
+        this.index = _index
         this.hideItem = null
     }
 
     create() {
-        let type = this.property
-        let bmp = new Bitmap(type.url)
+        const type = this.property
+        const bmp = new Bitmap(type.url)
         bmp.divide = new Pos(0, 0)
-        bmp.pos = new Pos(this.pos.y * 40 + type.offset.x, this.pos.x * 40 + type.offset.y)
-        bmp.offset = new Pos(this.map.offset.x + type.offset.x, this.map.offset.y)
+        bmp.pos = new Pos(this.pos.y * 40 + type.offset.x, this.pos.x * 40)
+        bmp.offset = new Pos(this.map.offset.x + type.offset.x, this.map.offset.y + type.offset.y)
         bmp.Zindex = 3 * (this.pos.x + 1)
+        bmp.CanCollision = true; //碰撞
+        bmp.collision.size = new Size(40, 40)
+        bmp.collision.offset = new Pos(- type.offset.x, - type.offset.y)
         this.bmp = bmp
-
-        this.bmp.CanCollision = true; //碰撞
-        this.bmp.collision.size = new Size(40, 40)
-        this.bmp.collision.offset = new Pos(- type.offset.x, - type.offset.y)
         if (this.type == 1) {
             this.property = {
                 ...this.property,
                 ...{ canBomb: true, create: true, produce: false, canMove: true, canPush: false, canHide: false }
             }
             let shadow_bmp = new Bitmap("pic/ShadowGift.png")
-            bmp.pos.y -= 6
-            this.gift = { index: 0, Upoffset: 0, turn: 0, pre: new Pos(this.bmp.pos.x, this.bmp.pos.y) }
             this.bmp.size = this.property.size
             this.shadow = { index: 0, bmp: shadow_bmp }
-            shadow_bmp.offset = new Pos(4 + type.offset.x, 36)
-            shadow_bmp.pos.x = this.bmp.pos.x + this.bmp.size.width / 2 - 9
-            shadow_bmp.pos.y = this.bmp.pos.y + this.bmp.size.height - 6
-            shadow_bmp.Zindex = bmp.Zindex - 1
             shadow_bmp.size = new Size(18, 9)
-            shadow_bmp.divide = new Pos(this.shadow.index * 19, 0)
-            bmp.animate = new Animator(this.giftUpdate.bind(this), 5)
-            Game.freshItem.arr.push(this)
+            shadow_bmp.pos = new Pos(this.bmp.pos.x, this.bmp.pos.y)
+            shadow_bmp.offset = new Pos(this.bmp.offset.x + (this.bmp.size.width - shadow_bmp.size.width) / 2,
+                this.bmp.offset.y + this.bmp.size.height - shadow_bmp.size.height - 3)
+            shadow_bmp.Zindex = bmp.Zindex - 1
+            shadow_bmp.divide = new Pos(this.shadow.index * 18, 0)
+            this.bmp.animate = new Animator(this.giftUpdate.bind(this), 5)
+            this.bmp.pos.y -= 6
+            this.gift = { index: 0, Upoffset: 0, turn: 1, pre: new Pos(this.bmp.pos.x, this.bmp.pos.y) }
         }
     }
 
     giftUpdate(anime) {
+        anime.time = -1
         if (this.type == 1) {
             if (typeof this.shadow != 'undefined' && typeof this.gift != 'undefined') {
-                //this.shadow.index = (this.shadow.index + 1) % 2
-                this.shadow.index = (this.gift.Upoffset == 0) ? 1 : 0
+                this.shadow.index = this.gift.Upoffset === 0 ? 1 : 0
                 this.gift.index = (this.gift.index + 1) % 3
             }
             this.bmp.pos.y = this.gift.pre.y - this.gift.Upoffset
-            if (!this.gift.turn)
-                this.gift.Upoffset++
-            else
-                this.gift.Upoffset--
-            if (this.gift.Upoffset == 6) {
-                this.gift.turn = !this.gift.turn
-            }
-            if (this.gift.Upoffset == 0) {
-                this.gift.turn = !this.gift.turn
-            }
-            this.bmp.divide = new Pos(this.gift.index * this.bmp.size.width, 0)
-            this.shadow.bmp.divide = new Pos(this.shadow.index * 19, 0)
+            this.gift.Upoffset += this.gift.turn
+            if (this.gift.Upoffset == 6 || this.gift.Upoffset == 0) this.gift.turn *= -1 //换向
+            this.bmp.divide.x = this.gift.index * this.bmp.size.width
+            this.shadow.bmp.divide.x = this.shadow.index * 18
         }
     }
 
     del() {
-        // console.log(1)
         this.bmp.visible = false
         if (typeof this.shadow != 'undefined')
             this.shadow.bmp.visible = false
@@ -192,13 +186,23 @@ class Block {
             if (this.map.dataAt(this.pos.x, this.pos.y).hideItem == this)
                 this.map.dataAt(this.pos.x, this.pos.y).hideItem = null
         }
-        if (this.type == 1) {
-            //  console.log("nice")
-            let index = Game.freshItem.arr.indexOf(this)
-            if (index != -1)
-                Game.freshItem.arr.splice(index, 1)
+    }
+
+    pick(player) {
+        switch (this.index) {
+            case 1: player.bombCount++; player.bombCount = Math.min(player.bombCount, player.bombCountMax); break;
+            case 2: player.speed += 0.3; player.speed = Math.min(player.speed, player.speedMax); break;
+            case 3: player.bombMight++; player.bombMight = Math.min(player.bombMight, player.bombMightMax); break;
+            case 4: player.bombMight = player.bombMightMax; break;
+            case 5: if (!player.kick) player.kick = true; player.speed = player.speedMax; break;
+            case 6: if (!player.kick) player.kick = true; break;
+            case 7: if (!player.ride) player.getRide(1); break;
+            case 8: if (!player.ride) player.getRide(2); break;
+            case 9: if (!player.ride) player.getRide(4); break;
+            default: break;
         }
     }
+
 
     startMove(_pos) {
         let _times = 10
@@ -218,14 +222,17 @@ class Block {
             },
             timeCount: 0,
         }
+        this.bmp.noUpdateCollision = true
     }
 
     moveAnimateUpdate(anime) {
         if (typeof anime.moveAnimateProperty != 'undefined') {
-            this.bmp.pos = new Pos(this.bmp.pos.x + anime.moveAnimateProperty.distanceDelta.x,
-                this.bmp.pos.y + anime.moveAnimateProperty.distanceDelta.y)
+            /*this.bmp.pos = new Pos(this.bmp.pos.x + anime.moveAnimateProperty.distanceDelta.x,
+                this.bmp.pos.y + anime.moveAnimateProperty.distanceDelta.y)*/
+            let end = false
             anime.moveAnimateProperty.timeCount++
             if (anime.moveAnimateProperty.timeCount == anime.moveAnimateProperty.times) {
+                this.bmp.noUpdateCollision = false
                 if (this.map.dataAt(this.pos.x, this.pos.y) != null &&
                     this.map.dataAt(this.pos.x, this.pos.y).property.canHide)
                     this.map.dataAt(this.pos.x, this.pos.y).hideItem = null
@@ -242,6 +249,11 @@ class Block {
                     this.bmp.cover = false
                 }
                 this.bmp.Zindex = 3 * (this.pos.x + 1)
+                end = true
+            }
+            this.bmp.pos = new Pos(this.bmp.pos.x + anime.moveAnimateProperty.distanceDelta.x,
+                this.bmp.pos.y + anime.moveAnimateProperty.distanceDelta.y)
+            if (end) {
                 delete this.animateFuncCall
                 delete anime.moveAnimateProperty
                 this.bmp.animate = null
@@ -250,7 +262,7 @@ class Block {
     }
 
     startHide(_pos) {
-        let _times = 5
+        const _times = 5
         if (this.bmp.animate != null) {
             return
         }
@@ -280,7 +292,7 @@ class Block {
     }
 }
 
-class Map {
+class BlockMap {
     constructor(_rows, _cols) {
         this.row = _rows
         this.col = _cols
@@ -362,6 +374,6 @@ class Map {
     }
 }
 
-let map = new Map(BlockMaps.length, BlockMaps[0].length)
+let map = new BlockMap(BlockMaps.length, BlockMaps[0].length)
 
 

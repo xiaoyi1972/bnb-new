@@ -1,5 +1,5 @@
 let ridePic = {
-    1: { url: "pic/Owl.png", width: 40, height: 40, offsetX: 0, offsetY: -15, speed: 4, canMove: false },
+    1: { url: "pic/Owl.png", width: 40, height: 40, offsetX: 0, offsetY: -15, speed: 3.5, canMove: false },
     2: { url: "pic/SlowTurtle.png", width: 48, height: 32, offsetX: -4, offsetY: -9, speed: 2, canMove: false },
     3: { url: "pic/Turtle.png", width: 48, height: 32, offsetX: -4, offsetY: -9, speed: 6, canMove: false },
     4: { url: "pic/FastUFO.png", width: 52, height: 31, offsetX: -6, offsetY: -9, speed: 6, canMove: true }
@@ -17,9 +17,9 @@ class Rider {
 
     init(type) {
         this.bmp = new Bitmap(ridePic[type].url)
-        this.bmp.pos = this.player.bmp.pos
-        this.bmp.divide.y = new Pos(Math.floor(this.player.status / 9) * ridePic[this.type].width,
-            this.player.dir * ridePic[this.type].height)
+        this.bmp.pos = this.player.bmp.pos.copy()
+        this.bmp.divide.x = Math.floor(this.player.status / 9) * ridePic[this.type].width
+        this.bmp.divide.y = this.player.dir * ridePic[this.type].height
         this.bmp.size = new Size(ridePic[this.type].width, ridePic[this.type].height)
         this.bmp.offset = new Pos(ridePic[this.type].offsetX + (this.player.bmp.size.width - 40) / 2,
             this.player.bmp.size.height + ridePic[this.type].offsetY)

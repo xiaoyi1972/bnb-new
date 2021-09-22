@@ -108,12 +108,10 @@ function createRoleEvent(player) {
     document.addEventListener('keyup', keydownend)
 
     function keydown(event) {
-        //if (event.keyCode in {37:'Left',38:'UP',39:'Right',40:'Right'})
         rolekey(player, event.keyCode)
     }
 
     function keydownend(event) {
-        // if (event.keyCode in { 37: 'Left', 38: 'UP', 39: 'Right', 40: 'Down' })
         rolekeyend(player, event.keyCode)
     }
 
@@ -125,8 +123,6 @@ function rolekey(player, key) {
             isKeyup = false
             //player.stopMove()
         }
-
-
         if (!isKeyup) {
             currentKeyCode = key
             isKeyup = true
@@ -136,7 +132,7 @@ function rolekey(player, key) {
                 case 38:player.moveActivate = player.move.bind(player, directions.Up);break;//上；
                 case 40: player.moveActivate = player.move.bind(player, directions.Down);break;//下；
             }
-                player.moveActivate()
+            player.moveActivate()
         }
 
     }

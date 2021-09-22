@@ -4,8 +4,19 @@ Array.get2dArray = function (_rows, _cols, _value) {
 
 class Bitmap {
     constructor(url, _pos = new Pos(-NaN, -NaN)) {
+        this.image = Game.picLoaded.get(url)
+        if (typeof this.image == 'undefined') {
+            this.image = new Image()
+            this.image.onload = () => {
+                if (this.m_size == undefined) {
+                    this.m_size = new Size(this.image.width, this.image.height)
+                }
+                Game.picLoaded.set(url, this.image)
+            }
+            this.image.src = url
+        }
         Object.defineProperty(this, "pos", {
-            get: function () { return this.m_pos; }, set: function (_pos) { this.m_pos = _pos; this.collisionCal(); }
+            get: function () { return this.m_pos; }, set: function (_pos) { this.m_pos = _pos; if (!this.noUpdateCollision) this.collisionCal(); }
         })
         Object.defineProperty(this, "size", {
             get: function () { return this.m_size; }, set: function (_size) { this.m_size = _size; }
@@ -45,26 +56,19 @@ class Bitmap {
                 }
             }
         })
-        this.image = new Image()
-        this.image.src = url
-        this.border = false
-        this.image.onload = () => {
-            if (this.size == undefined) {
-                this.size = new Size(this.image.width, this.image.height)
-            }
-            // this.collisionCal()
-        }
-        this.Zindex = 0; //绘图层次
+        this.border = false //显示边框
+        this.Zindex = 0 //绘图层次
         this.pos = _pos //位置
         this.divide = new Pos(0, 0); //分割
         this.size = null; //大小
         this.offset = new Pos(0, 0); //偏移
         this.visible = true; //可见
         this.cover = false; //覆盖
-        this.CanCollision = false; //能否碰撞
+        this.CanCollision = false //能否碰撞
         this.draw = this.draw.bind(this)
-        this.showCollision = false//true
-        this.animate = null
+        this.showCollision = false //显示碰撞框
+        this.animate = null //附加动画
+        this.noUpdateCollision = false //伴随碰撞框位置
         Game.picArray.push(this)
         Game.sorted = false
     }
@@ -122,14 +126,14 @@ class Bitmap {
 }
 
 class RectCollision {
-    get left() { return this.pos.x + this.offset.x; }
-    set left(val) { this.pos.x = val - this.offset.x; }
-    get top() { return this.pos.y + this.offset.y; }
-    set top(val) { this.pos.y = val - this.offset.y; }
-    get right() { return this.pos.x + this.offset.x + this.size.width; }
-    set right(val) { this.pos.x = val - this.offset.x - this.size.width; }
-    get bottom() { return this.pos.y + this.offset.y + this.size.height; }
-    set bottom(val) { this.pos.y = val - this.offset.y - this.size.height; }
+    get left() { return this.pos.x + this.offset.x }
+    set left(val) { this.pos.x = val - this.offset.x }
+    get top() { return this.pos.y + this.offset.y }
+    set top(val) { this.pos.y = val - this.offset.y }
+    get right() { return this.pos.x + this.offset.x + this.size.width }
+    set right(val) { this.pos.x = val - this.offset.x - this.size.width }
+    get bottom() { return this.pos.y + this.offset.y + this.size.height }
+    set bottom(val) { this.pos.y = val - this.offset.y - this.size.height }
 
     constructor(x, y, width, height) {
         this.pos = new Pos(x, y)
@@ -163,14 +167,17 @@ class Animator {
         this.interval = interval
         this.frame = 0
         this.time = 0
+        this.next = null
     }
     update() {
         this.frame++
         if (this.frame == this.interval) {
             this.frame = 0
             this.time++
-            //     console.log(`time:${this.time}`)
             this.func(this)
+        }
+        if (this.next instanceof Animator) {
+            this.next.update()
         }
     }
 }
@@ -200,21 +207,24 @@ class Game {
         this.ctx = this.canvas.getContext("2d")
         this.canvas.width = 680
         this.canvas.height = 600
-       // gaoqing(this.canvas)
-        //  this.end = false
+        // highDefinition(this.canvas)
+        // this.end = false
         this.handle
+        this.start = this.start.bind(this)
+        this.pause = this.pause.bind(this)
+        this.draw = this.draw.bind(this)
     }
 
-    start = () => {
+    start() {
         this.draw()
     }
 
-    pause = () => {
+    pause() {
         cancelAnimationFrame(this.handle)
         this.canvas.style.display = 'none'
     }
 
-    draw = () => {
+    draw() {
         Game.otherUpdate()
         if (!Game.sorted) {
             Game.picArray.sort((a, b) => { return a.visible && b.visible ? (a.Zindex < b.Zindex ? -1 : 1) : a.visible < b.visible ? 1 : -1 })
@@ -260,7 +270,7 @@ Game.otherUpdate = () => {
 }
 
 
-function gaoqing(canvas) {
+function highDefinition(canvas) {
     function getPixelRatio(context) {
         let backingStore = context.backingStorePixelRatio || context.webkitBackingStorePixelRatio ||
             context.mozBackingStorePixelRatio || context.msBackingStorePixelRatio ||
@@ -279,6 +289,7 @@ function gaoqing(canvas) {
 Game.sorted = true //是否排序
 Game.gArr = [];//物品概率数组
 Game.picArray = new Array(); //图片数组
+Game.picLoaded = new Map(); //已加载的图片
 Game.players = new Array();//玩家数组
 Game.bombs = new Array();//炸弹数组
 Game.freshItem = { deltaFrame: 0, arr: new Array() };//物品刷新数组
